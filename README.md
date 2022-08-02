@@ -4,7 +4,7 @@ Please go under edit and edit this file as needed for your project
 # Batch - Weekend
 ### Group Leader - IT21072642 - Akalanka Perera (Akalanka47000)
 ### Member 2 - IT21078378 - Ashen Maleesha (IT21078378)
-### Member 3 - IT21079672 - Palihena P.D.M.P ()
+### Member 3 - IT21079672 - Palihena P.D.M.P (LokoGod)
 ### Member 4 - IT21072406 - Dilusha Sohan ()
 ### Member 5 - IT21086366 - Kalani Jayawickrama (kalani-875)
 ### Member 6 - 
