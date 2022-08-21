@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema(
   {
@@ -33,21 +33,21 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["ADMIN", "USER"],
-      default: "USER",
+      enum: ['ADMIN', 'USER'],
+      default: 'USER',
       required: true,
     },
   },
   {
     versionKey: false,
-    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
-  }
-);
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  },
+)
 
-UserSchema.index({ createdAt: 1 });
+UserSchema.index({ createdAt: 1 })
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema)
 
-User.syncIndexes();
+User.syncIndexes()
 
-export default User;
+export default User
