@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid'
+import { createUserSetting } from '../repository/setting'
 import { createUser, getOneUser, findOneAndUpdateUser } from '../repository/user'
 import { sendMail } from './email'
 
@@ -49,6 +50,7 @@ export const verifyMailTemplate = async (email, verification_code) => {
 export const updateVerificationStatus = async (verificationCode) => {
   const user = await getOneUser({ verification_code: verificationCode })
   if (!user) return false
+  createUserSetting({ user: user._id })
   return await findOneAndUpdateUser({ email: user.email }, { is_verified: true })
 }
 
@@ -58,6 +60,11 @@ export const authResendVerification = async (email) => {
     return {
       status: 400,
       message: 'A user by the provided email does not exist',
+    }
+  if (user.is_verified)
+    return {
+      status: 400,
+      message: 'User is already verified',
     }
   const verification_code = uuidv4()
   const updatedUser = await findOneAndUpdateUser({ email }, { verification_code })
