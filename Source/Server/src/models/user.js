@@ -37,6 +37,22 @@ const UserSchema = new mongoose.Schema(
       default: 'USER',
       required: true,
     },
+    added_by: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    fcm_tokens: [
+      {
+        device_id: {
+          type: String,
+          required: true,
+        },
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     versionKey: false,
