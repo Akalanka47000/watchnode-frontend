@@ -5,21 +5,18 @@ const SettingSchema = new mongoose.Schema(
     user: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
     },
-    lecture_notification_enabled: {
+    schedule: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Schedule',
+      required: false,
+    },
+    notification_enabled: {
       type: Boolean,
       default: true,
     },
-    exam_notification_enabled: {
-      type: Boolean,
-      default: true,
-    },
-    lecture_notification_period: {
-      type: Number,
-      default: 60,
-    },
-    exam_notification_period: {
+    notification_period: {
       type: Number,
       default: 60,
     },

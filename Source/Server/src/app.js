@@ -9,6 +9,7 @@ import routes from './routes/index.routes'
 import { isCelebrateError } from 'celebrate'
 import { makeResponse } from './utils/response'
 import logger from './utils/logger'
+import initNotificationCronJob from './services/notification'
 
 const app = express()
 
@@ -64,4 +65,5 @@ const port = process.env.PORT || 3000
 
 app.listen(port, () => {
   console.log(`TT server successfully started on port ${port}`)
+  initNotificationCronJob()
 })

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const TimetableSchema = new mongoose.Schema(
+const ScheduleSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.SchemaTypes.ObjectId,
@@ -21,14 +21,6 @@ const TimetableSchema = new mongoose.Schema(
                     type: Number,
                     required: true,
                 },
-                day: {
-                    type: Number,
-                    required: true,
-                    validate: {
-                        validator: Number.isInteger,
-                        message: '{VALUE} is not an integer',
-                    },
-                },
                 location: {
                     type: String,
                     required: true,
@@ -42,10 +34,10 @@ const TimetableSchema = new mongoose.Schema(
     },
 )
 
-TimetableSchema.index({ createdAt: 1 })
+ScheduleSchema.index({ createdAt: 1 })
 
-const Timetable = mongoose.model('Timetable', TimetableSchema)
+const Schedule = mongoose.model('Schedule', ScheduleSchema)
 
-Timetable.syncIndexes()
+Schedule.syncIndexes()
 
-export default Timetable
+export default Schedule

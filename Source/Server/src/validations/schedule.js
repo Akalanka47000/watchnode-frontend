@@ -9,7 +9,6 @@ export const updateSchema = {
         name: Joi.string().required(),
         start: Joi.number().required(),
         end: Joi.number().required(),
-        day: Joi.number().valid(1, 2, 3, 4, 5, 6, 7).required(),
         location: Joi.string().required(),
     })).required(),
 }
