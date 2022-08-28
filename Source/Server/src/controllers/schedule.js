@@ -1,6 +1,6 @@
 import asyncHandler from '../middleware/async'
 import { makeResponse } from '../utils/response'
-import { uploadUserSchedule, getUserScheduleList, getSchedule, updateSchedule, updateScheduleSettings, deleteSchedule } from '../services/schedule'
+import { uploadUserSchedule, getUserScheduleList, getSchedule, updateSchedule, deleteSchedule } from '../services/schedule'
 
 export const uploadSchedule = asyncHandler(async (req, res) => {
     const result = await uploadUserSchedule(req.user._id, req.file)
@@ -39,16 +39,6 @@ export const updateScheduleById = asyncHandler(async (req, res) => {
         res,
         data: result,
         message: 'Schedule updated succesfully',
-    })
-})
-
-export const updateScheduleSettingsById = asyncHandler(async (req, res) => {
-    const result = await updateScheduleSettings(req.user._id, req.params.id, req.body)
-    if (result.status) return makeResponse({ res, ...result })
-    return makeResponse({
-        res,
-        data: result,
-        message: 'Schedule settings updated succesfully',
     })
 })
 

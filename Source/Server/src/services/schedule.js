@@ -1,9 +1,6 @@
 import { createSchedule, deleteScheduleById, fetchScheduleById, fetchUserSchedules, updateScheduleById } from '../repository/schedule'
 import tesseract from "node-tesseract-ocr"
-import { createUserSetting, updateScheduleSetting } from '../repository/setting'
-import { getOneUser } from '../repository/user'
-
-
+import { createUserSetting } from '../repository/setting'
 
 export const uploadUserSchedule = async (userId, file) => {
     const config = {
@@ -20,12 +17,11 @@ export const uploadUserSchedule = async (userId, file) => {
             console.log(error.message)
         })
     const data = {}
-    return true
-    // const schedule = await createSchedule({ user: userId, ...data })
-    // createUserSetting({
-    //     schedule: schedule._id
-    // })
-    // return schedule
+    const schedule = await createSchedule({ user: userId, ...data })
+    createUserSetting({
+        schedule: schedule._id
+    })
+    return schedule
 }
 
 export const getUserScheduleList = async (userId) => {
@@ -42,13 +38,6 @@ export const updateSchedule = async (userId, id, data) => {
     const schedule = await fetchScheduleById(id)
     if (schedule.user !== userId) return { status: 404, message: 'Schedule not found' }
     return updateScheduleById(id, data)
-}
-
-export const updateScheduleSettings = async (userId, id, data) => {
-    const schedule = await fetchScheduleById(id)
-    const scheduleUser = await getOneUser({ _id: schedule.user })
-    if (scheduleUser._id !== userId) return { status: 404, message: 'Schedule not found' }
-    return updateScheduleSetting(id, data)
 }
 
 export const deleteSchedule = async (userId, id) => {

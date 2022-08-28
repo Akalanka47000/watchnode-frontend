@@ -26,13 +26,13 @@ const AuthForm = ({ type }) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (type === 'login') {
-      const data = await login({
+      const { data } = await login({
         email: formData.name,
         password: formData.password,
       })
       if (rememberMe) localStorage.setItem('rememberMe', 'true')
       else localStorage.removeItem('rememberMe')
-      localStorage.setItem('token', JSON.stringify(data.access_token))
+      localStorage.setItem('token', data.access_token)
       localStorage.setItem('user', JSON.stringify(data.user))
       navigateTo('/')
     } else {

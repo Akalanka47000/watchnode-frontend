@@ -1,4 +1,4 @@
-const Input = ({ id, placeholder, type, onChange, required, prefixIcon }) => {
+const Input = ({ placeholder, type, required, prefixIcon, ...props }) => {
   return (
     <div className="relative my-2 group">
       {prefixIcon && (
@@ -7,14 +7,13 @@ const Input = ({ id, placeholder, type, onChange, required, prefixIcon }) => {
         </div>
       )}
       <input
-        id={id}
         placeholder={placeholder}
         type={type || 'text'}
         className={`w-full shadow-ds2 pr-4 py-2.5 lg:py-3.5 ${
           prefixIcon ? 'pl-14 group-hover:pl-16' : 'pl-4'
         } border-none text-sm font-semibold focus:ring-2 focus:ring-primary-base focus:outline-0 rounded-md transition-all duration-300`}
-        onChange={onChange}
         required={required || false}
+        {...props}
       />
     </div>
   )
