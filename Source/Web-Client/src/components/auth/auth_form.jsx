@@ -43,6 +43,7 @@ const AuthForm = ({ type }) => {
       }, 300)
     }
   }
+
   return (
     <div className="bg-white/90 backdrop-blur py-12 px-7 md:px-12 w-11/12 lg:w-1/2 rounded-2xl">
       <div className="flex justify-center items-center">

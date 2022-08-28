@@ -10,6 +10,9 @@ module.exports = {
           hover: '#9e54ff',
         },
       },
+      height: {
+        'screen-nav': 'calc(100vh - 5rem)',
+      },
       width: {},
       inset: {
         30: '7.5rem',

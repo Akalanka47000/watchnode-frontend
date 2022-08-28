@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <header className="w-full h-20 absolute z-50 p-5 flex justify-between items-center bg-white/10 backdrop-blur shadow-xl shadow-gray-500/10">
       <h2 className="text-2xl text-center font-bold text-white pb-2 cursor-default">Watchnode</h2>
-      <div className="flex justify-evenly align-items-center">
+      <div className="flex justify-evenly items-center">
         {navLinks.map((link) => (
           <Link
             to={link.path}

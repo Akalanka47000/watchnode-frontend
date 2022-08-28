@@ -13,7 +13,7 @@ export const uploadSchedule = asyncHandler(async (req, res) => {
 })
 
 export const getUserSchedules = asyncHandler(async (req, res) => {
-    const result = await getUserScheduleList(req.user._id)
+    const result = await getUserScheduleList(req.user._id, req.query.limit)
     if (result.status) return makeResponse({ res, ...result })
     return makeResponse({
         res,

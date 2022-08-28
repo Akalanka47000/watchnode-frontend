@@ -24,8 +24,8 @@ export const uploadUserSchedule = async (userId, file) => {
     return schedule
 }
 
-export const getUserScheduleList = async (userId) => {
-    return fetchUserSchedules(userId)
+export const getUserScheduleList = async (userId, limit) => {
+    return fetchUserSchedules(userId, limit)
 }
 
 export const getSchedule = async (userId, id) => {
