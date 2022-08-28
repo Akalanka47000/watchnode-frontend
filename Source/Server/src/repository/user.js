@@ -6,7 +6,7 @@ export const createUser = async (user) => {
   return userMade
 }
 
-export const getAllUsers = async ({ sort = {}, filter = {} }) => {
+export const getAllUsers = async ({ sort = {}, filter = {} } = {}) => {
   return await User.find(filter).sort(sort).select('-password')
 }
 

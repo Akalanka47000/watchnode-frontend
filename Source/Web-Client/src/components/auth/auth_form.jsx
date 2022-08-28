@@ -27,7 +27,7 @@ const AuthForm = ({ type }) => {
     e.preventDefault()
     if (type === 'login') {
       const data = await login({
-        email: formData.email,
+        email: formData.name,
         password: formData.password,
       })
       if (rememberMe) localStorage.setItem('rememberMe', 'true')
@@ -51,7 +51,14 @@ const AuthForm = ({ type }) => {
         </div>
       </div>
       <form id={`${type}Form`} className="flex flex-col " onSubmit={onSubmit}>
-        <Input type={type === 'login' ? 'email' : 'text'} id="name" placeholder={type === 'login' ? 'Email' : 'Name'} required onChange={handleInputChange} prefixIcon={<UserIcon />} />
+        <Input
+          type={type === 'login' ? 'email' : 'text'}
+          id="name"
+          placeholder={type === 'login' ? 'Email' : 'Name'}
+          required
+          onChange={handleInputChange}
+          prefixIcon={<UserIcon />}
+        />
         {type == 'register' && <Input type="text" id="email" placeholder="Email" required onChange={handleInputChange} prefixIcon={<MailIcon />} />}
         <Input id="password" type="password" placeholder="Password" required onChange={handleInputChange} prefixIcon={<KeyIcon />} />
 
@@ -68,7 +75,10 @@ const AuthForm = ({ type }) => {
             <div className="h-8 w-8 invert -rotate-90">
               <NextLottie animationData={arrowAnimation} />
             </div>{' '}
-            <a className="cursor-pointer text-sm text-primary-base hover:text-primary-hover group-hover:mr-2 transition-all duration-300" href={type === 'login' ? '/register' : '/login'}>
+            <a
+              className="cursor-pointer text-sm text-primary-base hover:text-primary-hover group-hover:mr-2 transition-all duration-300"
+              href={type === 'login' ? '/register' : '/login'}
+            >
               {type === 'login' ? 'Register' : 'Login'}
             </a>
           </div>

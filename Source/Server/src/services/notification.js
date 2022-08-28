@@ -1,7 +1,7 @@
 import { ToadScheduler, SimpleIntervalJob, AsyncTask } from 'toad-scheduler'
 import { getScheduleSetting, getUserSetting } from '../repository/setting'
 import { getAllUsers } from '../repository/user'
-import { fetchUserSchedules } from '../services/schedule'
+import { fetchUserSchedules } from '../repository/schedule'
 import logger from '../utils/logger'
 import { sendMail } from './email'
 
@@ -16,7 +16,7 @@ const initNotificationBroadcastCronJob = () => {
             users.map(async (user) => {
                 const userSetting = await getUserSetting(user._id)
                 if (userSetting.notification_enabled) {
-                    const schedules = fetchUserSchedules(user._id)
+                    const schedules = await fetchUserSchedules(user._id)
                     schedules.map(async (schedule) => {
                         const scheduleSetting = await getScheduleSetting(schedule._id)
                         if (scheduleSetting.notification_enabled) {
@@ -41,7 +41,7 @@ const initNotificationBroadcastCronJob = () => {
             logger.error(`Notification broadcasting failed | err - `, err)
         }
     )
-    const job = new SimpleIntervalJob({ seconds: 500, }, task)
+    const job = new SimpleIntervalJob({ seconds: 5, }, task)
 
     scheduler.addSimpleIntervalJob(job)
 }
