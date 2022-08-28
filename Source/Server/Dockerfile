@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . .
 
+RUN sudo apt install tesseract-ocr
+RUN sudo apt install libtesseract-dev
+
 RUN yarn install
 RUN yarn build
 

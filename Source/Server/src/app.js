@@ -36,7 +36,7 @@ app.get('/', (req, res) => res.status(200).json({ message: 'TT Server Up and Run
 
 app.use('/api', routes)
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   logger.error(`Error: ${err.message} | Stack: ${err.stack}`)
   if (isCelebrateError(err)) {
     // eslint-disable-next-line no-unused-vars
