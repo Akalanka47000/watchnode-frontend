@@ -1,7 +1,14 @@
+import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+import useRouteProtect from '../../hooks/useRouteProtect'
 
 const Layout = ({ children, title }) => {
-  document.title = title || 'App | Watchnode'
+  useRouteProtect()
+
+  useEffect(() => {
+    document.title = title || 'App | Watchnode'
+  }, [])
+
   return (
     <>
       <main className="bg-white text-black font-inter min-h-screen overflow-x-hidden">

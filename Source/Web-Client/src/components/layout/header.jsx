@@ -16,7 +16,6 @@ const Header = () => {
       <div className="flex justify-evenly align-items-center">
         <Link
           to="/settings"
-          onClick={logoutUser}
           className="p-2 ml-4 text-white bg-primary-base hover:bg-primary-hover outline-none rounded-md transition duration-300 shadow-sm"
         >
           <SupportIcon className="w-6 h-6" />

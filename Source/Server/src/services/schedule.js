@@ -21,11 +21,11 @@ export const uploadUserSchedule = async (userId, file) => {
         })
     const data = {}
     return true
-    const schedule = await createSchedule({ user: userId, ...data })
-    createUserSetting({
-        schedule: schedule._id
-    })
-    return schedule
+    // const schedule = await createSchedule({ user: userId, ...data })
+    // createUserSetting({
+    //     schedule: schedule._id
+    // })
+    // return schedule
 }
 
 export const getUserScheduleList = async (userId) => {
