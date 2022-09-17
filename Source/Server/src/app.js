@@ -9,7 +9,7 @@ import routes from './routes/index.routes'
 import { isCelebrateError } from 'celebrate'
 import { makeResponse } from './utils/response'
 import logger from './utils/logger'
-import { initNotificationCronJob } from './services/notification'
+import { initNotificationBroadcastCronJob } from './services/notification'
 
 const app = express()
 
@@ -64,7 +64,7 @@ global.__basedir = __dirname
 
 const port = process.env.PORT || 3000
 
-app.listen(port, () => {
+app.listen(port, '192.168.1.80', () => {
   console.log(`Watchnode server successfully started on port ${port}`)
-  initNotificationCronJob()
+  initNotificationBroadcastCronJob()
 })
