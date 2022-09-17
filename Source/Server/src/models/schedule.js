@@ -1,37 +1,37 @@
 import mongoose from 'mongoose'
 
 const ScheduleSchema = new mongoose.Schema(
-    {
-        user: {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: 'User',
-            required: true,
+  {
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    events: [
+      {
+        name: {
+          type: String,
+          required: true,
         },
-        events: [
-            {
-                name: {
-                    type: String,
-                    required: true,
-                },
-                start: {
-                    type: Number,
-                    required: true,
-                },
-                end: {
-                    type: Number,
-                    required: true,
-                },
-                location: {
-                    type: String,
-                    required: true,
-                },
-            }
-        ],
-    },
-    {
-        versionKey: false,
-        timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
-    },
+        start: {
+          type: Number,
+          required: true,
+        },
+        end: {
+          type: Number,
+          required: true,
+        },
+        location: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    versionKey: false,
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  },
 )
 
 ScheduleSchema.index({ createdAt: 1 })

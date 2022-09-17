@@ -25,9 +25,9 @@ export const getScheduleSettingsById = asyncHandler(async (req, res) => {
   const result = await getScheduleSettings(req.user._id, req.params.schedule_id)
   if (result.status) return makeResponse({ res, ...result })
   return makeResponse({
-      res,
-      data: result,
-      message: 'Schedule settings retrieved succesfully',
+    res,
+    data: result,
+    message: 'Schedule settings retrieved succesfully',
   })
 })
 
@@ -35,8 +35,8 @@ export const updateScheduleSettingsById = asyncHandler(async (req, res) => {
   const result = await updateScheduleSettings(req.user._id, req.params.schedule_id, req.body)
   if (result.status) return makeResponse({ res, ...result })
   return makeResponse({
-      res,
-      data: result,
-      message: 'Schedule settings updated succesfully',
+    res,
+    data: result,
+    message: 'Schedule settings updated succesfully',
   })
 })
