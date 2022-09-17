@@ -4,10 +4,11 @@ import { getAllUsers } from '../repository/user'
 import { fetchUserSchedules } from '../repository/schedule'
 import logger from '../utils/logger'
 import { sendMail } from './email'
+import { createNotification, deleteNotificationById, fetchAllNotifications, fetchNotificationById, fetchUserNotifications } from '../repository/notification'
 
 const scheduler = new ToadScheduler()
 
-const initNotificationBroadcastCronJob = () => {
+export const initNotificationBroadcastCronJob = () => {
     logger.info('Initializing notification broadcast cron job')
     const task = new AsyncTask(
         'notification broadcast',
@@ -29,7 +30,13 @@ const initNotificationBroadcastCronJob = () => {
                                         message: `${event.name} is about to start in ${period} minutes`,
                                     }
                                     const subject = 'Heads up! - Event is about to start'
-                                    sendMail(user.email, 'reminder', replacements, subject)
+                                    sendMail(user.email, 'reminder', replacements, subject).then(() => {
+                                        createNotification({
+                                            user: user._id,
+                                            event_name: event.name,
+                                            type: 'email',
+                                        })
+                                    })
                                 }
                             })
                         }
@@ -46,4 +53,15 @@ const initNotificationBroadcastCronJob = () => {
     scheduler.addSimpleIntervalJob(job)
 }
 
-export default initNotificationBroadcastCronJob
+export const getUserNotificationList = async (user, limit) => {
+    if (user.role === 'ADMIN') {
+        return fetchAllNotifications()
+    }
+    return fetchUserNotifications(user._id, limit)
+}
+
+export const deleteUserNotificationById = async (userId, id) => {
+    const notification = await fetchNotificationById(id)
+    if (notification.user !== userId) return { status: 404, message: 'Notification not found' }
+    return deleteNotificationById(id)
+}
