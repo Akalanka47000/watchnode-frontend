@@ -32,7 +32,7 @@ app.use(express.json({ limit: '1mb' }))
 
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => res.status(200).json({ message: 'TT Server Up and Running' }))
+app.get('/', (req, res) => res.status(200).json({ message: 'Watchnode Server Up and Running' }))
 
 app.use('/api', routes)
 

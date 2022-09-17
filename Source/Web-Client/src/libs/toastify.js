@@ -11,7 +11,6 @@ const success = (message) => {
 }
 
 const error = (message) => {
-  console.log(message, 44)
   toast.error(message, toastOptions)
 }
 

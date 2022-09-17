@@ -23,7 +23,7 @@ const Home = () => {
       <div className="h-screen w-screen bg-gradient-to-r from-black via-gray-800 to-black flex justify-between items-center relative z-40">
         <div className="w-full h-screen flex justify-center items-center mr-28">
           {schedule ? (
-            <div className="flex flex-col items-center justify-center">Schedule details</div>
+            <div className="grid grid-cols-7 grid-rows-8">Schedule details</div>
           ) : (
             <p className="text-white text-4xl font-bold">No Schedules Uploaded Yet</p>
           )}
