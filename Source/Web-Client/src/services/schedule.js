@@ -11,3 +11,7 @@ export const addSchedule = async (file) => {
     return axiosInstance.post(`/api/schedules`, formData)
   })
 }
+
+export const updateSchedule = async (id, data) => {
+  return await apiRequest(() => axiosInstance.put(`/api/schedules/${id}`, data))
+}

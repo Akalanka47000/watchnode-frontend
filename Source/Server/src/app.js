@@ -64,7 +64,7 @@ global.__basedir = __dirname
 
 const port = process.env.PORT || 3000
 
-app.listen(port, '192.168.1.80', () => {
+app.listen(port, () => {
   console.log(`Watchnode server successfully started on port ${port}`)
   initNotificationBroadcastCronJob()
 })

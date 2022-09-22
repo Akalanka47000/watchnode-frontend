@@ -1,5 +1,6 @@
 import { createSchedule, deleteScheduleById, fetchScheduleById, fetchUserSchedules, updateScheduleById } from '../repository/schedule'
 import tesseract from 'node-tesseract-ocr'
+import moment from 'moment'
 import { createUserSetting } from '../repository/setting'
 
 export const uploadUserSchedule = async (userId, file) => {
@@ -16,7 +17,22 @@ export const uploadUserSchedule = async (userId, file) => {
     .catch((error) => {
       console.log(error.message)
     })
-  const data = {}
+  const data = {
+    // eslint-disable-next-line no-unused-vars
+    events: [1, 2, 3, 4, 5, 6, 7].reduce((acc, curr, index, arr) => {
+      const eventsForDay = Array.from({ length: 20 }, (x, i) => i).map((hour) => {
+        const date = new Date()
+        const day = Number(moment().startOf('isoWeek').add(index, 'days').format('D'))
+        return {
+          name: `Event ${hour}`,
+          start: new Date(date.getFullYear(), date.getMonth(), day, hour, 0, 0, 0).getTime(),
+          end: new Date(date.getFullYear(), date.getMonth(), day, hour, 0, 0, 0).getTime() + 3600000,
+          location: '---',
+        }
+      })
+      return [...acc, ...eventsForDay]
+    }, []),
+  }
   const schedule = await createSchedule({ user: userId, ...data })
   createUserSetting({
     schedule: schedule._id,
@@ -26,7 +42,7 @@ export const uploadUserSchedule = async (userId, file) => {
 
 export const getUserScheduleList = async (userId, limit) => {
   const result = await fetchUserSchedules(userId, limit)
-  if (limit === 1) {
+  if (Number(limit) === 1) {
     if (result.length > 0) {
       return result[0]
     }

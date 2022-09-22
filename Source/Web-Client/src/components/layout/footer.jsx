@@ -9,7 +9,7 @@ const Footer = () => {
           <HeartIcon className="fill-red-700 h-5" />
           &nbsp; By&nbsp;
           <a href="https://akalanka47000.github.io/portfolio/">
-            <p className="text-primary-base hover:text-primary-hover transition-all duration-200">Akalanka Perera</p>
+            <p className="text-primary-base hover:text-primary-hover transition-all duration-200">Team Watchnode</p>
           </a>
         </p>
       </div>
