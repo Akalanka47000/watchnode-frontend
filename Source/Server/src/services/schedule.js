@@ -25,7 +25,14 @@ export const uploadUserSchedule = async (userId, file) => {
 }
 
 export const getUserScheduleList = async (userId, limit) => {
-  return fetchUserSchedules(userId, limit)
+  const result = await fetchUserSchedules(userId, limit)
+  if (limit === 1) {
+    if (result.length > 0) {
+      return result[0]
+    }
+    return null
+  }
+  return result
 }
 
 export const getSchedule = async (userId, id) => {
