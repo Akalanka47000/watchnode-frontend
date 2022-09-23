@@ -20,11 +20,11 @@ export const uploadUserSchedule = async (userId, file) => {
   const data = {
     // eslint-disable-next-line no-unused-vars
     events: [1, 2, 3, 4, 5, 6, 7].reduce((acc, curr, index, arr) => {
-      const eventsForDay = Array.from({ length: 20 }, (x, i) => i).map((hour) => {
+      const eventsForDay = Array.from({ length: 24 }, (x, i) => i).map((hour) => {
         const date = new Date()
         const day = Number(moment().startOf('isoWeek').add(index, 'days').format('D'))
         return {
-          name: `Event ${hour}`,
+          name: `Event ${hour + 1}`,
           start: new Date(date.getFullYear(), date.getMonth(), day, hour, 0, 0, 0).getTime(),
           end: new Date(date.getFullYear(), date.getMonth(), day, hour, 0, 0, 0).getTime() + 3600000,
           location: '---',
@@ -53,18 +53,18 @@ export const getUserScheduleList = async (userId, limit) => {
 
 export const getSchedule = async (userId, id) => {
   const schedule = await fetchScheduleById(id)
-  if (schedule.user !== userId) return { status: 404, message: 'Schedule not found' }
+  if (schedule.user.toString() !== userId.toString()) return { status: 404, message: 'Schedule not found' }
   return schedule
 }
 
 export const updateSchedule = async (userId, id, data) => {
   const schedule = await fetchScheduleById(id)
-  if (schedule.user !== userId) return { status: 404, message: 'Schedule not found' }
+  if (schedule.user.toString() !== userId.toString()) return { status: 404, message: 'Schedule not found' }
   return updateScheduleById(id, data)
 }
 
 export const deleteSchedule = async (userId, id) => {
   const schedule = await fetchScheduleById(id)
-  if (schedule.user !== userId) return { status: 404, message: 'Schedule not found' }
+  if (schedule.user.toString() !== userId.toString()) return { status: 404, message: 'Schedule not found' }
   return deleteScheduleById(id)
 }

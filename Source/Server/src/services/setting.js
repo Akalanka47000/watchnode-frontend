@@ -13,13 +13,13 @@ export const updateSetting = async (userId, data) => {
 export const getScheduleSettings = async (userId, id) => {
   const schedule = await fetchScheduleById(id)
   const scheduleUser = await getOneUser({ _id: schedule.user })
-  if (scheduleUser._id !== userId) return { status: 404, message: 'Schedule not found' }
+  if (scheduleUser._id.toString() !== userId.toString()) return { status: 404, message: 'Schedule not found' }
   return getScheduleSetting(id)
 }
 
 export const updateScheduleSettings = async (userId, id, data) => {
   const schedule = await fetchScheduleById(id)
   const scheduleUser = await getOneUser({ _id: schedule.user })
-  if (scheduleUser._id !== userId) return { status: 404, message: 'Schedule not found' }
+  if (scheduleUser._id.toString() !== userId.toString()) return { status: 404, message: 'Schedule not found' }
   return updateScheduleSetting(id, data)
 }

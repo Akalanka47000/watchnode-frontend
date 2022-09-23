@@ -48,7 +48,7 @@ export const initNotificationBroadcastCronJob = () => {
       logger.error(`Notification broadcasting failed | err - `, err)
     },
   )
-  const job = new SimpleIntervalJob({ seconds: 5 }, task)
+  const job = new SimpleIntervalJob({ seconds: 180 }, task)
 
   scheduler.addSimpleIntervalJob(job)
 }

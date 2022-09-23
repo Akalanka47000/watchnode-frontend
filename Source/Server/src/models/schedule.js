@@ -9,6 +9,7 @@ const ScheduleSchema = new mongoose.Schema(
     },
     events: [
       {
+        _id: false,
         name: {
           type: String,
           required: true,
