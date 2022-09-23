@@ -25,7 +25,7 @@ export const initNotificationBroadcastCronJob = () => {
               schedule.events.map(async (event) => {
                 const now = new Date()
                 const eventDate = new Date(event.start)
-                if (eventDate.getTime() - now.getTime() <= period * 60 * 1000) {
+                if (eventDate.getTime() > now.getTime() && eventDate.getTime() - now.getTime() <= period * 60 * 1000) {
                   const replacements = {
                     message: `${event.name} is about to start in ${period} minutes`,
                   }
