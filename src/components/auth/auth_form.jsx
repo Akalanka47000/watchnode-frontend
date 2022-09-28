@@ -60,7 +60,7 @@ const AuthForm = ({ type }) => {
           onChange={handleInputChange}
           prefixIcon={<UserIcon />}
         />
-        {type == 'register' && <Input type="text" id="email" placeholder="Email" required onChange={handleInputChange} prefixIcon={<MailIcon />} />}
+        {type === 'register' && <Input type="text" id="email" placeholder="Email" required onChange={handleInputChange} prefixIcon={<MailIcon />} />}
         <Input id="password" type="password" placeholder="Password" required onChange={handleInputChange} prefixIcon={<KeyIcon />} />
 
         <div className="flex justify-between mt-4">

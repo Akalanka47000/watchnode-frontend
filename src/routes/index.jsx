@@ -6,17 +6,19 @@ import Settings from '../pages/settings'
 import useRouteProtect from '../hooks/useRouteProtect'
 
 const Router = () => {
-    useRouteProtect()
+  useRouteProtect()
 
-    const location = useLocation()
+  const location = useLocation()
 
-    return <Routes location={location}>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="settings/" element={<Settings />} />
-        <Route path="settings/:schedule_id" element={<Settings />} />
+  return (
+    <Routes location={location}>
+      <Route path="/" element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="settings/" element={<Settings />} />
+      <Route path="settings/:schedule_id" element={<Settings />} />
     </Routes>
+  )
 }
 
 export default Router

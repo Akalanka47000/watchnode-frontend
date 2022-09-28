@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 
 const Layout = ({ children, title }) => {
-
   useEffect(() => {
     document.title = title || 'App | Watchnode'
   }, [])
