@@ -1,7 +1,7 @@
 {
   "name": "watchnode-web",
   "private": false,
-  "homepage": "https://akalanka47000.github.io/",
+  "homepage": "https://akalanka47000.github.io/watchnode-frontend",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

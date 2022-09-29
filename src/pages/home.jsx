@@ -47,9 +47,9 @@ const Home = () => {
     <Layout title="Home | Watchnode">
       <Header />
       <div className="min-h-screen w-screen bg-gradient-to-r from-black via-gray-800 to-black flex justify-between items-center relative z-40 pt-20 2xl:pt-10">
-        <div className="w-full min-h-screen flex justify-center items-center mr-28 mb-24">
+        <div className="w-full min-h-screen flex justify-center items-center mb-24 relative">
           {schedule && schedule?.events?.length > 0 ? (
-            <div className="min-h-80vh flex flex-col w-full justify-start items-center py-10">
+            <div className="min-h-80vh flex flex-col w-full justify-start items-center py-10 mr-24">
               <div className="w-full flex justify-center items-center mb-8 px-8 xl:px-[8rem] 2xl:px-[7.3rem]">
                 <Button
                   value="<<"
@@ -104,10 +104,10 @@ const Home = () => {
           ) : (
             <p className="text-white text-4xl font-bold">No Schedules Uploaded Yet</p>
           )}
-        </div>
-        <div className="absolute top-0 right-0 w-28 min-h-screen h-full flex justify-center items-center bg-primary-base hover:bg-primary-hover transition-all duration-300 cursor-pointer">
-          <CloudUploadIcon className="w-16 h-16 mr-3 text-white" />
-          <input type="file" className="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0" onChange={onFileInput} />
+          <div className="absolute top-10 right-0 w-28  h-full flex justify-center items-center bg-primary-base hover:bg-primary-hover transition-all duration-300 cursor-pointer">
+            <CloudUploadIcon className="w-16 h-16 mr-3 text-white" />
+            <input type="file" className="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0" onChange={onFileInput} />
+          </div>
         </div>
       </div>
       <Footer />
