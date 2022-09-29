@@ -15,3 +15,7 @@ export const addSchedule = async (file) => {
 export const updateSchedule = async (id, data) => {
   return await apiRequest(() => axiosInstance.put(`/api/schedules/${id}`, data))
 }
+
+export const deleteSchedule = async (id) => {
+  return await apiRequest(() => axiosInstance.delete(`/api/schedules/${id}`))
+}

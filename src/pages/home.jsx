@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { CloudUploadIcon } from '@heroicons/react/solid'
+import Swal from 'sweetalert2'
 import { Footer, Header, Layout } from '../components/layout'
 import useEffectOnce from '../hooks/useEffectOnce'
-import { addSchedule, getLatestSchedule, updateSchedule } from '../services/schedule'
+import { addSchedule, deleteSchedule, getLatestSchedule, updateSchedule } from '../services/schedule'
 import toast from '../libs/toastify'
 import Input from '../components/common/input'
 import { Button } from '../components/common'
@@ -43,13 +44,32 @@ const Home = () => {
     })
   }
 
+  const handleDelete = () => {
+    Swal.fire({
+      title: "<h5 style='color:#ffffff'>Are you sure?</h5>",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#4800ff',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      background: '#121212',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteSchedule(schedule._id).then(() => {
+          toast.success('Schedule Deleted Successfully')
+          fetchSchedule()
+        })
+      }
+    })
+  }
+
   return (
     <Layout title="Home | Watchnode">
       <Header />
       <div className="min-h-screen w-screen bg-gradient-to-r from-black via-gray-800 to-black flex justify-between items-center relative z-40 pt-20 2xl:pt-10">
         <div className="w-full min-h-screen flex justify-center items-center mb-24 relative">
           {schedule && schedule?.events?.length > 0 ? (
-            <div className="min-h-80vh flex flex-col w-full justify-start items-center py-10 mr-24">
+            <div className="min-h-80vh flex flex-col w-full justify-start items-center py-10 mr-0 lg:mr-24">
               <div className="w-full flex justify-center items-center mb-8 px-8 xl:px-[8rem] 2xl:px-[7.3rem]">
                 <Button
                   value="<<"
@@ -97,15 +117,21 @@ const Home = () => {
                   )
                 })}
               </form>
-              <div className="w-full mt-3 px-8 xl:px-[8rem] 2xl:px-[7.3rem]">
-                <Button value="Update" padding="w-full px-12 py-2 md:py-3" extraClasses="mt-4" onClick={handleSubmit} />
+              <div className="w-full flex gap-x-4 mt-3 px-8 xl:px-[8rem] 2xl:px-[7.3rem]">
+                <Button value="Update" padding="w-1/2 lg:w-full px-12 py-2 md:py-3" extraClasses="mt-4" onClick={handleSubmit} />
+                <Button
+                  value="Delete"
+                  padding="w-1/2 lg:w-3/12 px-12 py-2 md:py-3"
+                  extraClasses="mt-4 bg-red-600 hover:bg-red-700"
+                  onClick={handleDelete}
+                />
               </div>
             </div>
           ) : (
             <p className="text-white text-4xl font-bold">No Schedules Uploaded Yet</p>
           )}
-          <div className="absolute top-10 right-0 w-28  h-full flex justify-center items-center bg-primary-base hover:bg-primary-hover transition-all duration-300 cursor-pointer">
-            <CloudUploadIcon className="w-16 h-16 mr-3 text-white" />
+          <div className="fixed lg:absolute bottom-0 lg:top-10 right-0 w-full lg:w-28 h-16 lg:h-full flex justify-center items-center bg-primary-base hover:bg-primary-hover transition-all duration-300 cursor-pointer">
+            <CloudUploadIcon className="w-10 lg:w-16 h-10 lg:h-16 mr-3 text-white" />
             <input type="file" className="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0" onChange={onFileInput} />
           </div>
         </div>
