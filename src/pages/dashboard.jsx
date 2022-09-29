@@ -80,7 +80,7 @@ const Dashboard = () => {
                     labels: Object.keys(notificationData?.data)?.map((key) => notificationData['data'][key].name),
                     datasets: [
                       {
-                        label: 'Submissions Per Question',
+                        label: 'Notifications Sent Per User',
                         backgroundColor: Object.keys(notificationData?.data)?.map(() => '#fff'),
                         borderColor: Object.keys(notificationData?.data)?.map(() => '#fff'),
                         data: Object.keys(notificationData?.data)?.map((key) => notificationData['data'][key].count),
