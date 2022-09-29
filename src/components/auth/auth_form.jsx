@@ -6,6 +6,8 @@ import welcomeAnimation from '../../../public/assets/animations/welcome.json'
 import arrowAnimation from '../../../public/assets/animations/arrow-right.json'
 import { login, register } from '../../services/auth'
 import toast from '../../libs/toastify'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../../store/user'
 
 const AuthForm = ({ type }) => {
   const navigateTo = useNavigate()
@@ -15,6 +17,8 @@ const AuthForm = ({ type }) => {
     email: '',
     password: '',
   })
+
+  const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
     setFormData({
@@ -26,21 +30,27 @@ const AuthForm = ({ type }) => {
   const onSubmit = async (e) => {
     e.preventDefault()
     if (type === 'login') {
-      const { data } = await login({
+      await login({
         email: formData.name,
         password: formData.password,
+      }).then((res) => {
+        if (res) {
+          if (rememberMe) localStorage.setItem('rememberMe', 'true')
+          else localStorage.removeItem('rememberMe')
+          localStorage.setItem('token', res.data.access_token)
+          dispatch(setUser(res.data.user))
+          navigateTo('/')
+        }
       })
-      if (rememberMe) localStorage.setItem('rememberMe', 'true')
-      else localStorage.removeItem('rememberMe')
-      localStorage.setItem('token', data.access_token)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      navigateTo('/')
     } else {
-      const data = await register(formData)
-      navigateTo('/login')
-      setTimeout(() => {
-        toast.success(data.message)
-      }, 300)
+      await register(formData).then((data) => {
+        if (data) {
+          navigateTo('/login')
+          setTimeout(() => {
+            toast.success(data.message)
+          }, 300)
+        }
+      })
     }
   }
 

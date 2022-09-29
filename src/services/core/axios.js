@@ -1,5 +1,7 @@
 import axios from 'axios'
 import toast from '../../libs/toastify'
+import store from '../../store'
+import { toggleLoader } from '../../store/ui'
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
@@ -14,10 +16,20 @@ axiosInstance.interceptors.request.use((config) => {
 })
 
 export const apiRequest = async (request) => {
-  return await request()
+  store.dispatch(toggleLoader(true))
+  const response = await request()
     .then((res) => res.data)
     .catch((error) => {
-      toast.convertAndNotifyError(error)
+      const message = error.response?.data?.message
+      if (error.response?.status === 403) {
+        if (localStorage.getItem('token')) {
+          toast.error(message)
+        }
+      } else {
+        toast.error(message)
+      }
       return null
     })
+  store.dispatch(toggleLoader(false))
+  return response
 }
