@@ -1,5 +1,5 @@
 import axios from 'axios'
-import toast from '../../libs/toastify'
+import toastify from '../../libs/toastify'
 import store from '../../store'
 import { toggleLoader } from '../../store/ui'
 
@@ -20,13 +20,12 @@ export const apiRequest = async (request) => {
   const response = await request()
     .then((res) => res.data)
     .catch((error) => {
-      const message = error.response?.data?.message
       if (error.response?.status === 403) {
         if (localStorage.getItem('token')) {
-          toast.error(message)
+          toastify.convertAndNotifyError(error)
         }
       } else {
-        toast.error(message)
+        toastify.convertAndNotifyError(error)
       }
       return null
     })

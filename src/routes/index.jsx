@@ -5,6 +5,7 @@ import Home from '../pages/home'
 import Settings from '../pages/settings'
 import Dashboard from '../pages/dashboard'
 import useRouteProtect from '../hooks/useRouteProtect'
+import UserManagement from '../pages/management/users'
 
 const Router = () => {
   useRouteProtect()
@@ -19,6 +20,7 @@ const Router = () => {
       <Route path="/settings/" element={<Settings />} />
       <Route path="/settings/:schedule_id" element={<Settings />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/user-management" element={<UserManagement />} />
     </Routes>
   )
 }

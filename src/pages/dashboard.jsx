@@ -47,7 +47,7 @@ const Dashboard = () => {
         data,
       })
     })
-  }, [])
+  })
 
   return (
     <Layout title="Dashboard | Watchnode">
@@ -61,7 +61,7 @@ const Dashboard = () => {
             </div>
 
             <div className="w-full">
-              <Link to="/users">
+              <Link to="/user-management">
                 <div className="min-h-[14rem] flex flex-col justify-center items-center bg-white/5 hover:bg-transparent border-transparent hover:border hover:border-white/10 backdrop-blur-sm p-12 mb-12 lg:mb-0 rounded-lg transition duration-300 cursor-pointer">
                   <ImUsers className="text-white w-12 h-12 mb-3" />
                   <span className="text-white text-2xl text-center">User Management</span>

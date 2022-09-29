@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 
-const Input = ({ placeholder, type, required, prefixIcon, ...props }) => {
+const Input = ({ placeholder, type, required, prefixIcon, value, ...props }) => {
   return (
     <div className={twMerge('relative my-2 group', props.wrapperclasses || '')}>
       {prefixIcon && (
@@ -19,6 +19,7 @@ const Input = ({ placeholder, type, required, prefixIcon, ...props }) => {
         )}
         placeholder={placeholder}
         required={required || false}
+        value={value}
       />
     </div>
   )

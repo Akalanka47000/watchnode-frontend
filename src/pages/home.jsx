@@ -46,13 +46,12 @@ const Home = () => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: "<h5 style='color:#ffffff'>Are you sure?</h5>",
+      title: 'Are you sure?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#4800ff',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
-      background: '#121212',
     }).then((result) => {
       if (result.isConfirmed) {
         deleteSchedule(schedule._id).then(() => {
