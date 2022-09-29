@@ -5,7 +5,7 @@ import './styles/app.css'
 const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/watchnode-frontend">
         <Router />
       </BrowserRouter>
     </div>
