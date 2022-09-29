@@ -45,10 +45,12 @@ const AuthForm = ({ type }) => {
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur py-12 px-7 md:px-12 w-11/12 lg:w-1/2 rounded-2xl">
+    <div className="bg-white/5 backdrop-blur border-2 border-primary-base/50 py-12 px-7 md:px-12 w-11/12 lg:w-1/2 rounded-2xl">
       <div className="flex justify-center items-center">
         <div className="w-9/12 sm:w-7/12 xl:w-4/12 mb-10">
-          <NextLottie animationData={welcomeAnimation} />
+          <div className="border-2 border-primary-base rounded-full">
+            <NextLottie animationData={welcomeAnimation} />
+          </div>
         </div>
       </div>
       <form id={`${type}Form`} className="flex flex-col " onSubmit={onSubmit}>
@@ -66,13 +68,13 @@ const AuthForm = ({ type }) => {
         <div className="flex justify-between mt-4">
           <div className="flex items-center">
             <Checkbox checked={rememberMe} toggle={setRememberMe} />
-            <p className="text-sm text-blue ml-2 font-semibold">Remember Me</p>
+            <p className="text-sm text-white ml-2 font-semibold">Remember Me</p>
           </div>
         </div>
         <Button value={type === 'login' ? 'Login' : 'Register'} padding="px-12 py-2 md:py-3" extraClasses="mt-4" />
         <div className="group flex justify-end items-center mt-6">
           <div className="flex justify-center items-center">
-            <p className="text-sm text-blue ml-2 font-semibold">{type === 'login' ? "Don't have an account yet" : 'Already have an account'}</p>{' '}
+            <p className="text-sm text-white ml-2 font-semibold">{type === 'login' ? "Don't have an account yet" : 'Already have an account'}</p>{' '}
             <div className="h-8 w-8 invert -rotate-90">
               <NextLottie animationData={arrowAnimation} />
             </div>{' '}
