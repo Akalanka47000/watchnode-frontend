@@ -5,7 +5,7 @@ import './styles/app.css'
 const App = () => {
   return (
     <div className="App">
-      <BrowserRouter basename="/watchnode-frontend">
+      <BrowserRouter basename={window.location.pathname || ''}>
         <Router />
       </BrowserRouter>
     </div>
