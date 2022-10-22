@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 import { Tooltip } from 'flowbite-react'
 import { startCase } from 'lodash'
 import { useState } from 'react'
@@ -5,30 +7,30 @@ import { CSVLink } from 'react-csv'
 import Swal from 'sweetalert2'
 import { TiUserDelete } from 'react-icons/ti'
 import { AiTwotoneEdit, AiOutlineDownload } from 'react-icons/ai'
-import { Button } from '../../components/common'
+import { Button, Filters, Sorts } from '../../components/common'
 import { Footer, Header, Layout } from '../../components/layout'
-import useEffectOnce from '../../hooks/useEffectOnce'
-import { deleteUser, getAllUsers } from '../../services/user'
 import UserModal from '../../components/users/userModal'
-import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { userFilters, userSorts } from '../../filters/user'
+import { deleteUser, getAllUsers } from '../../services/user'
 
 const UserManagement = () => {
   const [userData, setUserData] = useState(null)
 
   const [showUserModal, setShowUserModal] = useState(false)
+  const [filterQuery, setFilterQuery] = useState('')
+  const [sortQuery, setSortQuery] = useState('')
 
   const [user, setUser] = useState(null)
 
   const refresh = () => {
-    getAllUsers().then((res) => {
+    getAllUsers(filterQuery, sortQuery).then((res) => {
       setUserData(res.data)
     })
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     refresh()
-  })
+  }, [filterQuery, sortQuery])
 
   useEffect(() => {
     user && setShowUserModal(true)
@@ -55,7 +57,11 @@ const UserManagement = () => {
   return (
     <Layout title="User Management | Watchnode">
       <Header />
-      <div className="min-h-screen w-screen bg-gradient-to-r from-black via-gray-900 to-black flex flex-col justify-center items-center relative pt-28">
+      <div className="min-h-screen w-screen bg-gradient-to-r from-black via-gray-900 to-black flex flex-col justify-center items-center relative pt-10">
+        <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
+          <Filters filters={userFilters} setFilterQuery={setFilterQuery} />
+          <Sorts sorts={userSorts} setSortQuery={setSortQuery} />
+        </div>
         <div className="w-10/12 flex justify-end items-center mt-8 mb-8">
           <Tooltip content="Download as CSV">
             <CSVLink
@@ -91,10 +97,10 @@ const UserManagement = () => {
             {userData.map((user, index) => {
               return (
                 <div key={`${user._id}-user-management`} className="w-10/12 flex justify-between items-center bg-white/5 rounded-md p-8 relative">
-                  <div className="flex flex-col gap-y-2 justify-center items-start">
-                    <span className="text-white text-sm md:text-md font-semibold">Name: {user.name}</span>
-                    <span className="text-white text-sm md:text-md font-semibold">Email: {user.email}</span>
-                    <span className="text-white text-sm md:text-md font-semibold">Role: {startCase(user.role)}</span>
+                  <div className="w-full flex flex-col lg:flex-row gap-y-2 justify-start items-start">
+                    <span className="w-full lg:w-2/12 text-white text-sm md:text-md font-semibold">Name: {user.name}</span>
+                    <span className="w-full lg:w-3/12 text-white text-sm md:text-md font-semibold">Email: {user.email}</span>
+                    <span className="w-full lg:w-3/12 text-white text-sm md:text-md font-semibold">Role: {startCase(user.role)}</span>
                   </div>
                   <div className="h-full flex justify-center items-center absolute right-0 top-0 rounded-r-md">
                     <div
