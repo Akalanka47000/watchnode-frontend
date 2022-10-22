@@ -1,9 +1,10 @@
 import { Tooltip } from 'flowbite-react'
 import { startCase } from 'lodash'
 import { useState } from 'react'
+import { CSVLink } from 'react-csv'
 import Swal from 'sweetalert2'
 import { TiUserDelete } from 'react-icons/ti'
-import { AiTwotoneEdit } from 'react-icons/ai'
+import { AiTwotoneEdit, AiOutlineDownload } from 'react-icons/ai'
 import { Button } from '../../components/common'
 import { Footer, Header, Layout } from '../../components/layout'
 import useEffectOnce from '../../hooks/useEffectOnce'
@@ -56,6 +57,26 @@ const UserManagement = () => {
       <Header />
       <div className="min-h-screen w-screen bg-gradient-to-r from-black via-gray-900 to-black flex flex-col justify-center items-center relative pt-28">
         <div className="w-10/12 flex justify-end items-center mt-8 mb-8">
+          <Tooltip content="Download as CSV">
+            <CSVLink
+              headers={[
+                { label: 'ID', key: '_id' },
+                { label: 'Name', key: 'name' },
+                { label: 'Email', key: 'email' },
+                { label: 'Role', key: 'role' },
+                { label: 'Created Date', key: 'created_at' },
+                { label: 'Updated Date', key: 'updated_at' },
+              ]}
+              data={userData || []}
+              filename={'[Watchnode] - All Users.csv'}
+            >
+              <Button
+                value={<AiOutlineDownload className="w-8 h-8"></AiOutlineDownload>}
+                padding="px-2 py-1 md:py-2"
+                extraClasses="w-20 bg-primary-base flex place-content-center mr-5"
+              />
+            </CSVLink>
+          </Tooltip>
           <Button
             value="Add User"
             padding="w-1/2 lg:w-3/12 px-12 py-2 md:py-3"
